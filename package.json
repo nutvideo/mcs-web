@@ -15,6 +15,8 @@
     "electron_build": "electron-packager ./dist mcs-web --platform=win32 --arch=x64 --icon=./src/assets/favicon.ico --overwrite"
   },
   "dependencies": {
+    "axios": "^0.21.1",
+    "element-ui": "^2.15.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
