@@ -1,23 +1,24 @@
 <template>
-  <div class="home">
-    <!-- <el-container>
-      <el-header>
-        <div id="nav">
-          <router-link to="/">Home</router-link>
-          <router-link to="/setting">设置</router-link>
+  <!-- <div class="home"> -->
+    <el-container class="main-container">
+      <el-header class="">
+        <div class="left-box">
+          <img src="@/assets/hdcon1.png">
+          <span>会议控制系统</span>
         </div>
+        <div class="right-box"></div>
       </el-header>
     <el-container>
       <el-aside width="200px" height="100%">Aside</el-aside>
     <el-main>Main</el-main>
   </el-container>
-</el-container> -->
-    <img src="@/assets/hdcon.png">
+</el-container>
+    <!-- <img src="@/assets/hdcon.png">
     <h1>{{ msg }}</h1>
     <h2>hdcon</h2>
     <el-button @click="doGetRequest()">发送get</el-button>
-    <el-button @click="doPostRequest()">发送get</el-button>
-  </div>
+    <el-button @click="doPostRequest()">发送get</el-button> -->
+  <!-- </div> -->
 </template>
 
 <script>
@@ -40,9 +41,50 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang="less" scoped>
+.el-header{
+  // background-color: #ffffff;
+  display: flex;
+  justify-content:space-between;
+  padding-left: 0;
+  // color: rgb(226, 215, 215);
+  align-items: center;
+  font-size: 20px;
+
+  .left-box{
+    display: flex;
+    align-items: center;
+    img{
+      width: 60px;
+      height: 60px;
+      // margin: 0px 0px 10px 10px;
+    }
+    span{
+      margin-left: 15px;
+    }
+  }
+  .right-box{
+    display: flex;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    background-color: #488a63;
+  }
+}
+/* .left-box{
+  width: 200px;
+  height: 60px;
+  background-color: #2f5c97;
+}
+.right-box{
+  width: 200px;
+  background-color: #488a63;
+} */
+.main-container{
+  height: 100%;
+}
 .el-header, .el-footer {
-    background-color: #B3C0D1;
+    background-color: #ffffff;
     color: #333;
     text-align: center;
     line-height: 60px;
@@ -62,11 +104,11 @@ export default {
   body > .el-container {
     margin-bottom: 40px;
   }
-  .el-container:nth-child(5) .el-aside,
+  /* .el-container:nth-child(5) .el-aside,
   .el-container:nth-child(6) .el-aside {
     line-height: 260px;
   }
   .el-container:nth-child(7) .el-aside {
     line-height: 320px;
-  }
+  } */
 </style>

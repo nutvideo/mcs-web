@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="setting">
     <!-- <img src="@/assets/hdcon.png"> -->
     <h1>{{ msg }}</h1>
     <!-- <h2>hdcon</h2> -->
@@ -27,7 +27,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.home{
+.setting{
   /* color: #42b983; */
   background: #0571ec;
 }
