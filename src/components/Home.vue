@@ -10,7 +10,9 @@
       </el-header>
     <el-container>
       <el-aside width="200px" height="100%">Aside</el-aside>
-    <el-main>Main</el-main>
+    <el-main>
+      <el-button @click="doGetRequest()">发送get</el-button>
+    </el-main>
   </el-container>
 </el-container>
     <!-- <img src="@/assets/hdcon.png">
@@ -22,6 +24,7 @@
 </template>
 
 <script>
+import { findUserList } from '@/api/user'
 export default {
   name: 'Home',
   data () {
@@ -32,6 +35,9 @@ export default {
   methods: {
     doGetRequest () {
       console.log('发起get网络请求')
+      findUserList({ }).then((response) => {
+        console.log(response)
+      })
     },
     doPostRequest () {
       console.log('发起post网络请求')
