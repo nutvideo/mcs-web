@@ -3,9 +3,9 @@ import request from '@/utils/request'
  * 后面请求都是需要鞋带token
  * @returns
  */
-export function findUserList () {
+export function findAutoPartsList () {
   return request({
-    url: 'system/user',
+    url: 'system/parts/findAutoPartsList',
     method: 'get'
   })
 }

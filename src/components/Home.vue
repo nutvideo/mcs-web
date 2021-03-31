@@ -9,9 +9,12 @@
         <div class="right-box"></div>
       </el-header>
     <el-container>
-      <el-aside width="200px" height="100%">Aside</el-aside>
+      <el-aside width="200px" height="100%">
+        <el-button @click="doGetRequest()">发送user-get</el-button>
+        <el-button @click="doPostRequest()">发送qp-get</el-button>
+      </el-aside>
     <el-main>
-      <el-button @click="doGetRequest()">发送get</el-button>
+      <span>{{data}}</span>
     </el-main>
   </el-container>
 </el-container>
@@ -25,11 +28,13 @@
 
 <script>
 import { findUserList } from '@/api/user'
+import { findAutoPartsList } from '@/api/parts'
 export default {
   name: 'Home',
   data () {
     return {
-      msg: 'Welcome to home App'
+      msg: 'Welcome to home App',
+      data: []
     }
   },
   methods: {
@@ -37,10 +42,15 @@ export default {
       console.log('发起get网络请求')
       findUserList({ }).then((response) => {
         console.log(response)
+        this.data = response['data']
       })
     },
     doPostRequest () {
       console.log('发起post网络请求')
+      findAutoPartsList({ }).then((response) => {
+        console.log(response)
+        this.data = response['data']
+      })
     }
   }
 }
