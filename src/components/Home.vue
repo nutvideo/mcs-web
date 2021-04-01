@@ -6,31 +6,31 @@
           <img src="@/assets/hdcon1.png">
           <span>会议控制系统</span>
         </div>
+        <el-button @click="doGetRequest()">发送user-get</el-button>
+        <el-button @click="doPostRequest()">发送qp-get</el-button>
         <div class="right-box"></div>
       </el-header>
     <el-container>
-      <el-aside width="200px" height="100%">
+      <!-- <el-aside width="200px" height="100%">
         <el-button @click="doGetRequest()">发送user-get</el-button>
         <el-button @click="doPostRequest()">发送qp-get</el-button>
-      </el-aside>
+      </el-aside> -->
     <el-main>
       <span>{{data}}</span>
     </el-main>
   </el-container>
 </el-container>
-    <!-- <img src="@/assets/hdcon.png">
-    <h1>{{ msg }}</h1>
-    <h2>hdcon</h2>
-    <el-button @click="doGetRequest()">发送get</el-button>
-    <el-button @click="doPostRequest()">发送get</el-button> -->
-  <!-- </div> -->
 </template>
 
 <script>
+import PartsList from './PartsList'
 import { findUserList } from '@/api/user'
 import { findAutoPartsList } from '@/api/parts'
 export default {
   name: 'Home',
+  components: {
+    PartsList
+  },
   data () {
     return {
       msg: 'Welcome to home App',
