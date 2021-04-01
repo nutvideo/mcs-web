@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/components/Home'
+import Main from '@/components/Main'
 // import Setting from '@/components/Setting'
 import Login from '@/components/Login'
 
@@ -10,18 +10,13 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Home',
-      component: Home
+      name: 'Main',
+      component: Main
     },
     {
       path: '/login',
       name: 'login',
       component: Login
     }
-    // {
-    //   path: '/setting',
-    //   name: 'Setting',
-    //   component: Setting
-    // }
   ]
 })
