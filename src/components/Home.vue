@@ -3,18 +3,37 @@
     <el-container class="main-container">
       <el-header class="">
         <div class="left-box">
-          <img src="@/assets/hdcon1.png">
-          <span>会议控制系统</span>
+          <img class="systemimage" src="@/assets/hdcon1.png">
+          <!-- background: rgba(11, 42, 70, 0.3); -->
+          <span style="width:125px;color: #868787;font-size: 18px;font-family:PingFangSC-Semibold;">控制系统中心</span>
+          <img class="headImage" style="margin-left: 20px;" src="@/assets/headImage.png" alt="">
+          <span style="margin-left: 12px;font-size: 15px;">
+              <font color="#333333" style="color: #868787;font-size: 15px;font-family:PingFangSC-Semibold;">admin 您好,欢迎登录</font>
+          </span>
         </div>
-        <el-button @click="doGetRequest()">发送user-get</el-button>
-        <el-button @click="doPostRequest()">发送qp-get</el-button>
-        <div class="right-box"></div>
+        <div class="right-box">
+            <!-- <img src="@/assets/hdcon1.png" alt=""> -->
+          <el-button type="text" @click="doPostRequest()">
+            <i class="fa fa-exclamation-circle" style="color: #868787"/>
+            <span style="margin-left: 2px;">
+              <font color="#333333;">帮助</font>
+            </span>
+          </el-button>
+          <!-- <router-link to="/login">退出</router-link> -->
+          <el-button type="text" @click="logout()" style="margin-left: 20px;">
+            <i class="fa fa-power-off" style="color: #ff0000"/>
+            <span style="margin-left: 2px;">
+              <router-link to="/login"></router-link>
+              <font color="#b22222">退出</font>
+            </span>
+          </el-button>
+        </div>
       </el-header>
     <el-container>
-      <!-- <el-aside width="200px" height="100%">
+      <el-aside width="200px" height="100%">
         <el-button @click="doGetRequest()">发送user-get</el-button>
         <el-button @click="doPostRequest()">发送qp-get</el-button>
-      </el-aside> -->
+      </el-aside>
     <el-main>
       <span>{{data}}</span>
     </el-main>
@@ -51,6 +70,9 @@ export default {
         console.log(response)
         this.data = response['data']
       })
+    },
+    logout () {
+      window.location.href = '/login'
     }
   }
 }
@@ -68,9 +90,11 @@ export default {
   font-size: 20px;
 
   .left-box{
+    width: 450px;
     display: flex;
     align-items: center;
-    img{
+    background-color: #ffffff;
+    .systemimage{
       width: 60px;
       height: 60px;
       // margin: 0px 0px 10px 10px;
@@ -82,20 +106,30 @@ export default {
   .right-box{
     display: flex;
     align-items: center;
-    width: 60px;
+    width: 120px;
     height: 60px;
-    background-color: #488a63;
+    // background-color: #e7e2e2;
+    // img{
+    //   width: 60px;
+    //   height: 60px;
+    //   margin: 0px 0px 10px 10px;
+    // }
   }
 }
-/* .left-box{
-  width: 200px;
-  height: 60px;
-  background-color: #2f5c97;
+.left-box-head{
+  // display: flex;
+  justify-content:space-left;
+  padding-left: 0;
+  background-color: #e7e2e2;
 }
-.right-box{
-  width: 200px;
-  background-color: #488a63;
-} */
+.headImage{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  // box-shadow:0 0 1px rgb(61, 55, 55) inset;
+  box-shadow:2px 2px 5px rgb(54, 42, 42);
+}
+
 .main-container{
   height: 100%;
 }
