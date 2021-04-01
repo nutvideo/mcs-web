@@ -12,6 +12,12 @@
           </span> -->
         </div>
         <div class="right-box">
+          <el-button type="text" @click="cleanData()">
+            <i class="fa fa-exclamation-circle" style="color: #868787"/>
+            <span style="margin-left: 2px;">
+              <font color="#333333;">清空数据</font>
+            </span>
+          </el-button>
           <el-button type="text" @click="doPostRequest()">
             <i class="fa fa-exclamation-circle" style="color: #868787"/>
             <span style="margin-left: 2px;">
@@ -46,10 +52,9 @@
           <MenuTreeList :menuList="this.dataMenuList"></MenuTreeList>
         </el-menu> -->
         <!-- 固定数据 -->
-        <el-menu :unique-opened="true" :collapse-transition="false" :collapse="isCollapse" default-active="1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" background-color="#ffffff" text-color="#868787" active-text-color="#333333">
+        <el-menu @select="handleSelect" :unique-opened="true" :collapse-transition="false" :collapse="isCollapse" default-active="1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" background-color="#ffffff" text-color="#868787" active-text-color="#333333">
           <el-submenu index="1">
             <template slot="title">
-              <!-- <i class="el-icon-location"></i> -->
               <i class="fa fa-address-card-o"></i>
               <span style="margin-left: 15px;">业务管理</span>
             </template>
@@ -62,9 +67,8 @@
               <span>汽配列表</span>
             </el-menu-item>
           </el-submenu>
-          <el-submenu index="2">
+          <!-- <el-submenu index="2">
             <template slot="title">
-              <!-- <i class="el-icon-setting"></i> -->
               <i class="fa fa-cogs"></i>
               <span style="margin-left: 15px;">系统管理</span>
             </template>
@@ -76,7 +80,7 @@
               <i class="el-icon-location"></i>
               <span>网络设置</span>
             </el-menu-item>
-          </el-submenu>
+          </el-submenu> -->
         </el-menu>
         <!-- <el-button @click="doGetRequest()">发送user-get</el-button>
         <el-button @click="doPostRequest()">发送qp-get</el-button> -->
@@ -100,7 +104,7 @@ export default {
     PartsList,
     MenuTreeList
   },
-  data () {
+  data() {
     return {
       msg: 'Welcome to home App',
       data: [],
@@ -137,24 +141,43 @@ export default {
     }
   },
   methods: {
-    doGetRequest () {
+    cleanData() {
+      this.data = []
+    },
+    handleSelect(key, keyPath) { // 点击了哪个
+      console.log(key)
+      console.log(keyPath)
+      if (keyPath[1] === '1-1') {
+        this.doGetRequest()
+      }
+      if (keyPath[1] === '1-2') {
+        this.doPostRequest()
+      }
+    },
+    handleOpen(key, keyPath) {
+      console.log(key, keyPath)
+    },
+    handleClose(key, keyPath) {
+      console.log(key, keyPath)
+    },
+    doGetRequest() {
       console.log('发起get网络请求')
       findUserList({ }).then((response) => {
         console.log(response)
         this.data = response['data']
       })
     },
-    doPostRequest () {
+    doPostRequest() {
       console.log('发起post网络请求')
       findAutoPartsList({ }).then((response) => {
         console.log(response)
         this.data = response['data']
       })
     },
-    logout () {
+    logout() {
       window.location.href = '/login'
     },
-    toggleBoxForCollapse () { // 取反默认为：
+    toggleBoxForCollapse() { // 取反默认为：
       this.isCollapse = !this.isCollapse
     }
   }
@@ -186,7 +209,8 @@ export default {
   .right-box{
     display: flex;
     align-items: center;
-    width: 120px;
+    // width: 120px;
+    width: 220px;
     height: 60px;
     // background-color: #e7e2e2;
     // img{
@@ -213,6 +237,10 @@ export default {
     text-align: center;
     line-height: 60px;
 }
+
+.test {
+    background-color: #a2bfdd;
+}
 // 侧边栏
   .el-aside {
     background-color: #ffffff;
@@ -222,7 +250,7 @@ export default {
     .toggle_box{
       // line-height: 200px;
       height: 30px;
-      background-color: #c7cac8;
+      background-color: #a2bfdd;
       font-size: 15px;
       font-weight: bold;
       line-height: 24px;

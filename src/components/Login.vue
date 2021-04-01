@@ -42,21 +42,21 @@
 <script>
 export default {
   name: 'login',
-  data () {
+  data() {
     return {
       msg: 'Login page'
     }
   },
   methods: {
-    changeForm () {
+    changeForm() {
       console.log('切换布局')
       var container = document.querySelector('.container')
       container.classList.toggle('active')
     },
-    doGetRequest () {
+    doGetRequest() {
       console.log('发起登录请求网络请求')
     },
-    doPostRequest () {
+    doPostRequest() {
       console.log('发起登录请求网络请求')
     }
   }

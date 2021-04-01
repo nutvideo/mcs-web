@@ -12,21 +12,21 @@ import { findUserList } from '@/api/user'
 import { findAutoPartsList } from '@/api/parts'
 export default {
   name: 'PartsList',
-  data () {
+  data() {
     return {
       msg: 'Welcome to PartsList page',
       data: []
     }
   },
   methods: {
-    doGetRequest () {
+    doGetRequest() {
       console.log('发起get网络请求')
       findUserList({ }).then((response) => {
         console.log(response)
         this.data = response['data']
       })
     },
-    doPostRequest () {
+    doPostRequest() {
       console.log('发起post网络请求')
       findAutoPartsList({ }).then((response) => {
         console.log(response)
