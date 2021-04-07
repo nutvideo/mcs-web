@@ -4,18 +4,17 @@
       <el-col :xs="24" :sm="24" :md="4" :lg="4" style="padding-left: 0px; padding-right: 0px">
         <div class="nav-header-bg">
           <div class="header-div-title">
-            <p>会议列表</p>
+            <p>用户列表</p>
           </div>
         </div>
       </el-col>
       <el-col :xs="24" :sm="24" :md="20" :lg="20" style="padding-left: 0px; padding-right: 0px">
         <div class="nav-header-bg">
-          <!-- <el-button @click="doGetRequest()">发送user-get</el-button> -->
-          <el-button @click="doPostRequest()">发送qp-get</el-button>
-          <el-button @click="doPostRequestfindPartsById()">单个请求</el-button>
+          <el-button @click="doGetRequest()">发送user-get</el-button>
         </div>
       </el-col>
     </el-row>
+    {{data}}
     <el-row :gutter="20" style="margin-top: 10px;margin-left: 0px; margin-right: 0px; height: 100%">
       <el-col :xs="24" :sm="24" :md="24" :lg="24" style="padding-left: 0px; padding-right: 0px">
         <!-- {{data}} -->
@@ -23,22 +22,26 @@
           <el-table-column type="index" width="50" label="序号"></el-table-column>
           <!-- <el-table-column type="selection" width="55"/> -->
           <el-table-column width="100px" align="center" prop="name" label="名称"/>
-          <el-table-column align="left" label="品牌" >
+          <el-table-column align="left" label="名称" >
             <template slot-scope="scope">
-              <span>{{ scope.row.band }}</span>
+              <span>{{ scope.row.username }}</span>
             </template>
           </el-table-column>
-          <el-table-column align="left" label="编码" >
+          <el-table-column align="left" label="昵称" >
             <template slot-scope="scope">
-              <span>{{ scope.row.carModel }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column align="left" label="系列" >
-            <template slot-scope="scope">
-              <span>{{ scope.row.carSeries }}</span>
+              <span>{{ scope.row.nickname }}</span>
             </template>
           </el-table-column>
         </el-table>
+        <!-- <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="currentPage4"
+      :page-sizes="[100, 200, 300, 400]"
+      :page-size="100"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="400">
+    </el-pagination> -->
       </el-col>
     </el-row>
   </div>
@@ -47,18 +50,17 @@
 <script>
 
 import { findUserList } from '@/api/user'
-import { findAutoPartsList, findPartsById } from '@/api/parts'
 export default {
-  name: 'PartsList',
+  name: 'UserList',
   data() {
     return {
-      msg: 'Welcome to PartsList page',
+      msg: 'Welcome to UserList page',
       data: [],
       selectPartsArr: []
     }
   },
   created() {
-    this.findUserList()
+    this.doGetRequest()
   },
   methods: {
     handleSelectionChange(val) {
@@ -71,22 +73,14 @@ export default {
       console.log('发起get网络请求')
       findUserList({ }).then((response) => {
         console.log(response)
-        this.data = response['data']
+        console.log(response['data'])
+        console.log(response['data']['data'])
+        console.log(response['data']['data']['content'])
+
+        // this.data = response['data']['data']['content']
       })
     },
     doPostRequest() {
-      console.log('发起post网络请求')
-      findAutoPartsList({ }).then((response) => {
-        console.log(response)
-        this.data = response['data']['data']['data']
-      })
-    },
-    doPostRequestfindPartsById() {
-      console.log('发起单个网络请求')
-      // var dic = { 'id': 1 }
-      findPartsById(1).then((response) => {
-        console.log(response)
-      })
     }
   }
 }

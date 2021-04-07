@@ -52,41 +52,53 @@
           <MenuTreeList :menuList="this.dataMenuList"></MenuTreeList>
         </el-menu> -->
         <!-- 固定数据 -->
-        <el-menu @select="handleSelect" :unique-opened="true" :collapse-transition="false" :collapse="isCollapse" default-active="1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" background-color="#ffffff" text-color="#868787" active-text-color="#333333">
+        <el-menu @select="handleSelect" :unique-opened="true" :collapse-transition="false" :collapse="isCollapse" default-active="1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" background-color="#ffffff" text-color="#868787" active-text-color="#383b3f">
           <el-submenu index="1">
+            <template slot="title">
+              <i class="fa fa-th-list"></i>
+              <span style="margin-left: 15px;">会议管理</span>
+            </template>
+            <el-menu-item title="分组1" index="1-1">
+              <i class="fa fa-users"></i>
+              <span>会议列表</span>
+            </el-menu-item>
+            <el-menu-item title="分组1" index="1-2">
+              <i class="fa fa-cubes"></i>
+              <span>mcu列表</span>
+            </el-menu-item>
+            <el-menu-item title="分组1" index="1-3">
+              <i class="fa fa-address-book-o"></i>
+              <span>会场列表</span>
+            </el-menu-item>
+            <el-menu-item title="分组1" index="1-4">
+              <i class="fa fa-wrench"></i>
+              <span>相关设置</span>
+            </el-menu-item>
+          </el-submenu>
+          <el-submenu index="2">
             <template slot="title">
               <i class="fa fa-address-card-o"></i>
               <span style="margin-left: 15px;">业务管理</span>
             </template>
-            <el-menu-item title="分组2" index="1-1">
-              <i class="el-icon-location"></i>
+            <el-menu-item title="分组2" index="2-1">
+              <i class="fa fa-user-circle"></i>
               <span>用户列表</span>
             </el-menu-item>
-            <el-menu-item title="分组2" index="1-2">
-              <i class="el-icon-location"></i>
+            <el-menu-item title="分组2" index="2-2">
+              <i class="fa fa-taxi"></i>
               <span>汽配列表</span>
             </el-menu-item>
           </el-submenu>
-          <!-- <el-submenu index="2">
-            <template slot="title">
-              <i class="fa fa-cogs"></i>
-              <span style="margin-left: 15px;">系统管理</span>
-            </template>
-            <el-menu-item title="分组2" index="2-1">
-              <i class="el-icon-location"></i>
-              <span>设置列表</span>
-            </el-menu-item>
-            <el-menu-item title="分组3" index="2-2">
-              <i class="el-icon-location"></i>
-              <span>网络设置</span>
-            </el-menu-item>
-          </el-submenu> -->
         </el-menu>
         <!-- <el-button @click="doGetRequest()">发送user-get</el-button>
         <el-button @click="doPostRequest()">发送qp-get</el-button> -->
       </el-aside>
     <el-main>
-      <span>{{data}}</span>
+      <div class="main-bg">
+         <PartsList v-show="PartsListPageStatus"></PartsList>
+         <UserList v-show="UserListPageStatus"></UserList>
+      <!-- <span>{{data}}</span> -->
+      </div>
     </el-main>
   </el-container>
 </el-container>
@@ -95,6 +107,7 @@
 <script>
 
 import PartsList from './PartsList'
+import UserList from './UserList'
 import { findUserList } from '@/api/user'
 import { findAutoPartsList } from '@/api/parts'
 import MenuTreeList from './MenuTree'
@@ -102,12 +115,15 @@ export default {
   name: 'Main',
   components: {
     PartsList,
+    UserList,
     MenuTreeList
   },
   data() {
     return {
       msg: 'Welcome to home App',
       data: [],
+      UserListPageStatus: false,
+      PartsListPageStatus: false,
       isCollapse: false,
       dataMenuList: [
         {
@@ -153,6 +169,24 @@ export default {
       if (keyPath[1] === '1-2') {
         this.doPostRequest()
       }
+      if (keyPath[1] === '1-3') {
+        this.doPostRequest()
+      }
+      if (keyPath[1] === '1-4') {
+        this.doPostRequest()
+      }
+      if (keyPath[1] === '2-1') {
+        console.log('点击了用户查询')
+        this.UserListPageStatus = true
+        this.PartsListPageStatus = false
+        this.doGetRequest()
+      }
+      if (keyPath[1] === '2-2') {
+        console.log('点击了配件查询')
+        this.UserListPageStatus = false
+        this.PartsListPageStatus = true
+        // this.doPostRequest()
+      }
     },
     handleOpen(key, keyPath) {
       console.log(key, keyPath)
@@ -187,7 +221,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
 .el-header{
-  // background-color: #ffffff;
+  background-color: #383b3f;
   display: flex;
   justify-content:space-between;
   padding-left: 0;
@@ -197,7 +231,7 @@ export default {
     width: 450px;
     display: flex;
     align-items: center;
-    background-color: #ffffff;
+    // background-color: #ffffff;
     .systemimage{
       width: 60px;
       height: 60px;
@@ -209,6 +243,7 @@ export default {
   .right-box{
     display: flex;
     align-items: center;
+    // background-color: #383b3f;
     // width: 120px;
     width: 220px;
     height: 60px;
@@ -239,18 +274,18 @@ export default {
 }
 
 .test {
-    background-color: #a2bfdd;
+    // background-color: #145ead;
 }
 // 侧边栏
   .el-aside {
-    background-color: #ffffff;
+    background-color: #383b3f;
     color: #333;
     // text-align: center;
     line-height: 200px;
     .toggle_box{
       // line-height: 200px;
       height: 30px;
-      background-color: #a2bfdd;
+      background-color: #383b3f;
       font-size: 15px;
       font-weight: bold;
       line-height: 24px;
@@ -268,8 +303,12 @@ export default {
   .el-main {
     background-color: #E9EEF3;
     color: #333;
-    text-align: center;
-    line-height: 160px;
+    // text-align: center;
+    // line-height: 360px;
+  }
+  .main-bg{
+    // background-color: #2e70b3;
+    height: 100%;
   }
   // body > .el-container {
   //   margin-bottom: 40px;

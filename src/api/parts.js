@@ -9,3 +9,10 @@ export function findAutoPartsList() {
     method: 'get'
   })
 }
+
+export function findPartsById(id) {
+  return request({
+    url: 'system/parts/findParts/' + id,
+    method: 'get'
+  })
+}
