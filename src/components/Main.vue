@@ -84,10 +84,10 @@
               <i class="fa fa-user-circle"></i>
               <span>用户列表</span>
             </el-menu-item>
-            <!-- <el-menu-item title="分组2" index="2-2">
+            <el-menu-item title="分组2" index="2-2">
               <i class="fa fa-taxi"></i>
               <span>汽配列表</span>
-            </el-menu-item> -->
+            </el-menu-item>
           </el-submenu>
         </el-menu>
         <!-- <el-button @click="doGetRequest()">发送user-get</el-button>
@@ -103,9 +103,7 @@
   </el-container>
 </el-container>
 </template>
-
 <script>
-
 import PartsList from './PartsList'
 import UserList from './UserList'
 import { findUserList } from '@/api/user'
